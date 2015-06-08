@@ -2,7 +2,6 @@ package com.jaspersoft.jasperserver.jrsh.core.operation;
 
 import com.jaspersoft.jasperserver.jrsh.core.operation.annotation.Master;
 import com.jaspersoft.jasperserver.jrsh.core.operation.parser.exception.OperationNotFoundException;
-import lombok.extern.log4j.Log4j;
 import org.apache.commons.lang3.StringUtils;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
@@ -12,16 +11,12 @@ import org.yaml.snakeyaml.Yaml;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Modifier;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Alexander Krasnyanskiy
  */
-@Log4j
+//@Log4j
 @SuppressWarnings("unchecked")
 public class OperationFactory {
 

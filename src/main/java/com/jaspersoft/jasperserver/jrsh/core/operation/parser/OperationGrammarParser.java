@@ -11,14 +11,12 @@ import com.jaspersoft.jasperserver.jrsh.core.operation.grammar.Rule.DefaultRule;
 import com.jaspersoft.jasperserver.jrsh.core.operation.grammar.graph.TokenEdge;
 import com.jaspersoft.jasperserver.jrsh.core.operation.grammar.graph.TokenEdgeFactory;
 import com.jaspersoft.jasperserver.jrsh.core.operation.grammar.token.Token;
-import com.jaspersoft.jasperserver.jrsh.core.operation.parser.exception.OperationParseException;
 import com.jaspersoft.jasperserver.jrsh.core.operation.parser.exception.CannotCreateTokenException;
+import com.jaspersoft.jasperserver.jrsh.core.operation.parser.exception.OperationParseException;
 import com.jaspersoft.jasperserver.jrsh.core.operation.parser.exception.WrongOperationFormatException;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.extern.log4j.Log4j;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.log4j.Logger;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.KShortestPaths;
@@ -26,21 +24,13 @@ import org.jgrapht.graph.DefaultDirectedGraph;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Alexander Krasnyanskiy
  */
-@Log4j
 public class OperationGrammarParser {
+    private static final Logger log = Logger.getLogger(OperationGrammarParser.class);
     private static Graph<Token, TokenEdge<Token>> graph;
     private static Map<String, Pair<Token, String[]>> dependencies;
     private static Map<String, RuleGroup> groups;
@@ -261,10 +251,11 @@ public class OperationGrammarParser {
         }
     }
 
-    @Data
-    @EqualsAndHashCode
     protected static class RuleGroup {
         Set<OperationParameter> parameters = new HashSet<>();
+
+        public RuleGroup() {
+        }
 
         Set<Token> getGroupTokens() {
             Set<Token> set = new HashSet<>();
@@ -273,12 +264,45 @@ public class OperationGrammarParser {
             }
             return set;
         }
+
+        public Set<OperationParameter> getParameters() {
+            return this.parameters;
+        }
+
+        public void setParameters(Set<OperationParameter> parameters) {
+            this.parameters = parameters;
+        }
+
+        public boolean equals(Object o) {
+            if (o == this) return true;
+            if (!(o instanceof RuleGroup)) return false;
+            final RuleGroup other = (RuleGroup) o;
+            if (!other.canEqual((Object) this)) return false;
+            final Object this$parameters = this.getParameters();
+            final Object other$parameters = other.getParameters();
+            if (this$parameters == null ? other$parameters != null : !this$parameters.equals(other$parameters))
+                return false;
+            return true;
+        }
+
+        public int hashCode() {
+            final int PRIME = 59;
+            int result = 1;
+            final Object $parameters = this.getParameters();
+            result = result * PRIME + ($parameters == null ? 0 : $parameters.hashCode());
+            return result;
+        }
+
+        protected boolean canEqual(Object other) {
+            return other instanceof RuleGroup;
+        }
     }
 
-    @Data
-    @EqualsAndHashCode
     protected static class OperationParameter {
         Set<Token> tokens = new HashSet<>();
+
+        public OperationParameter() {
+        }
 
         Set<Token> getOnlyMandatoryTokens() {
             Set<Token> mandatoryTokens = new HashSet<>();
@@ -288,6 +312,37 @@ public class OperationGrammarParser {
                 }
             }
             return mandatoryTokens;
+        }
+
+        public Set<Token> getTokens() {
+            return this.tokens;
+        }
+
+        public void setTokens(Set<Token> tokens) {
+            this.tokens = tokens;
+        }
+
+        public boolean equals(Object o) {
+            if (o == this) return true;
+            if (!(o instanceof OperationParameter)) return false;
+            final OperationParameter other = (OperationParameter) o;
+            if (!other.canEqual((Object) this)) return false;
+            final Object this$tokens = this.getTokens();
+            final Object other$tokens = other.getTokens();
+            if (this$tokens == null ? other$tokens != null : !this$tokens.equals(other$tokens)) return false;
+            return true;
+        }
+
+        public int hashCode() {
+            final int PRIME = 59;
+            int result = 1;
+            final Object $tokens = this.getTokens();
+            result = result * PRIME + ($tokens == null ? 0 : $tokens.hashCode());
+            return result;
+        }
+
+        protected boolean canEqual(Object other) {
+            return other instanceof OperationParameter;
         }
     }
 

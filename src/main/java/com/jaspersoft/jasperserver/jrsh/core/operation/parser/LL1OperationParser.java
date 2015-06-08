@@ -9,18 +9,16 @@ import com.jaspersoft.jasperserver.jrsh.core.operation.grammar.Lexer.DefaultLexe
 import com.jaspersoft.jasperserver.jrsh.core.operation.grammar.Rule;
 import com.jaspersoft.jasperserver.jrsh.core.operation.grammar.token.Token;
 import com.jaspersoft.jasperserver.jrsh.core.operation.parser.exception.OperationParseException;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
 /**
  * @author Alexander Krasnyanskiy
  */
-@Log4j
 public class LL1OperationParser implements OperationParser {
 
-    @Setter
+    private static final Logger log = Logger.getLogger(LL1OperationParser.class);
     private Lexer lexer;
 
     public LL1OperationParser() {
@@ -74,5 +72,9 @@ public class LL1OperationParser implements OperationParser {
             }
         }
         return true;
+    }
+
+    public void setLexer(Lexer lexer) {
+        this.lexer = lexer;
     }
 }

@@ -5,7 +5,6 @@ import com.jaspersoft.jasperserver.jrsh.core.operation.annotation.Value;
 import com.jaspersoft.jasperserver.jrsh.core.operation.grammar.token.Token;
 import com.jaspersoft.jasperserver.jrsh.core.operation.parser.exception.CannotFindSetterException;
 import com.jaspersoft.jasperserver.jrsh.core.operation.parser.exception.OperationParseException;
-import lombok.extern.log4j.Log4j;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -15,7 +14,7 @@ import java.util.List;
 /**
  * @author Alexander Krasnyanskiy
  */
-@Log4j
+//@Log4j
 public class OperationReflector {
 
     public static void set(Operation operation, List<Token> ruleTokens, List<String> inputTokens) {

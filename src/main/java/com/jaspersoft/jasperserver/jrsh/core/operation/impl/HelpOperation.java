@@ -5,7 +5,6 @@ import com.jaspersoft.jasperserver.jrsh.core.operation.Operation;
 import com.jaspersoft.jasperserver.jrsh.core.operation.OperationFactory;
 import com.jaspersoft.jasperserver.jrsh.core.operation.OperationResult;
 import com.jaspersoft.jasperserver.jrsh.core.operation.annotation.Master;
-import lombok.Data;
 
 import java.lang.reflect.Field;
 import java.util.Set;
@@ -15,7 +14,6 @@ import static com.jaspersoft.jasperserver.jrsh.core.operation.OperationResult.Re
 /**
  * @author Alexander Krasnyanskiy
  */
-@Data
 @Master(name = "help",
         tail = true,
         usage = "help [operation]",

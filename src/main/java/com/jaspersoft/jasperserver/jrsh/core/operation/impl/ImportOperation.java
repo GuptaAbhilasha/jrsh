@@ -12,8 +12,7 @@ import com.jaspersoft.jasperserver.jrsh.core.operation.annotation.Parameter;
 import com.jaspersoft.jasperserver.jrsh.core.operation.annotation.Value;
 import com.jaspersoft.jasperserver.jrsh.core.operation.grammar.token.impl.FileNameToken;
 import com.jaspersoft.jasperserver.jrsh.core.operation.grammar.token.impl.StringToken;
-import lombok.Data;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,8 +26,6 @@ import static java.lang.String.format;
 /**
  * @author Alexander Krasnyanskiy
  */
-@Data
-@Log4j
 @Master(name = "import",
         usage = "import [file]",
         description = "Operation <import> is used to import resources to JRS")
@@ -39,6 +36,7 @@ public class ImportOperation implements Operation {
     public static final String FORMATTED_FAILURE_MSG = "Import failed (%s)";
     public static final String UNKNOWN_CONTENT = "Neither a file nor a directory";
     public static final String IO_WARNING = "Could not delete a temporary file";
+    private static final Logger log = Logger.getLogger(ImportOperation.class);
 
     @Parameter(mandatory = true, dependsOn = {"import"}, values =
     @Value(tail = true, tokenClass = FileNameToken.class, tokenAlias = "IPTH"))
@@ -73,6 +71,9 @@ public class ImportOperation implements Operation {
     @Value(tokenAlias = "IWA", tokenClass = StringToken.class,
             tokenValue = "with-update", tail = true))
     private String withUpdate;
+
+    public ImportOperation() {
+    }
 
     @Override
     public OperationResult eval(Session session) {
@@ -193,6 +194,92 @@ public class ImportOperation implements Operation {
             parameters.add(ImportParameter.SKIP_USER_UPDATE);
         }
         return parameters;
+    }
+
+    public String getPath() {
+        return this.path;
+    }
+
+    public String getWithIncludeAuditEvents() {
+        return this.withIncludeAuditEvents;
+    }
+
+    public String getWithIncludeMonitoringEvents() {
+        return this.withIncludeMonitoringEvents;
+    }
+
+    public String getWithIncludeAccessEvents() {
+        return this.withIncludeAccessEvents;
+    }
+
+    public String getWithIncludeServerSettings() {
+        return this.withIncludeServerSettings;
+    }
+
+    public String getWithSkipUserUpdate() {
+        return this.withSkipUserUpdate;
+    }
+
+    public String getWithUpdate() {
+        return this.withUpdate;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public void setWithIncludeAuditEvents(String withIncludeAuditEvents) {
+        this.withIncludeAuditEvents = withIncludeAuditEvents;
+    }
+
+    public void setWithIncludeMonitoringEvents(String withIncludeMonitoringEvents) {
+        this.withIncludeMonitoringEvents = withIncludeMonitoringEvents;
+    }
+
+    public void setWithIncludeAccessEvents(String withIncludeAccessEvents) {
+        this.withIncludeAccessEvents = withIncludeAccessEvents;
+    }
+
+    public void setWithIncludeServerSettings(String withIncludeServerSettings) {
+        this.withIncludeServerSettings = withIncludeServerSettings;
+    }
+
+    public void setWithSkipUserUpdate(String withSkipUserUpdate) {
+        this.withSkipUserUpdate = withSkipUserUpdate;
+    }
+
+    public void setWithUpdate(String withUpdate) {
+        this.withUpdate = withUpdate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ImportOperation that = (ImportOperation) o;
+        if (!(path != null ? !path.equals(that.path) : that.path != null))
+            if (!(withIncludeAuditEvents != null ? !withIncludeAuditEvents.equals(that.withIncludeAuditEvents) : that.withIncludeAuditEvents != null))
+                if (!(withIncludeMonitoringEvents != null ? !withIncludeMonitoringEvents.equals(that.withIncludeMonitoringEvents) : that.withIncludeMonitoringEvents != null))
+                    if (!(withIncludeAccessEvents != null ? !withIncludeAccessEvents.equals(that.withIncludeAccessEvents) : that.withIncludeAccessEvents != null))
+                        if (!(withIncludeServerSettings != null ? !withIncludeServerSettings.equals(that.withIncludeServerSettings) : that.withIncludeServerSettings != null))
+                            if (!(withSkipUserUpdate != null ? !withSkipUserUpdate.equals(that.withSkipUserUpdate) : that.withSkipUserUpdate != null))
+                                if (!(withUpdate != null ? !withUpdate.equals(that.withUpdate) : that.withUpdate != null))
+                                    return true;
+        return false;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = path != null ? path.hashCode() : 0;
+        result = 31 * result + (withIncludeAuditEvents != null ? withIncludeAuditEvents.hashCode() : 0);
+        result = 31 * result + (withIncludeMonitoringEvents != null ? withIncludeMonitoringEvents.hashCode() : 0);
+        result = 31 * result + (withIncludeAccessEvents != null ? withIncludeAccessEvents.hashCode() : 0);
+        result = 31 * result + (withIncludeServerSettings != null ? withIncludeServerSettings.hashCode() : 0);
+        result = 31 * result + (withSkipUserUpdate != null ? withSkipUserUpdate.hashCode() : 0);
+        result = 31 * result + (withUpdate != null ? withUpdate.hashCode() : 0);
+        return result;
     }
 }
 

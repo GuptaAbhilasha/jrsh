@@ -6,7 +6,6 @@ import com.jaspersoft.jasperserver.jaxrs.client.core.exceptions.AuthenticationFa
 import com.jaspersoft.jasperserver.jaxrs.client.core.exceptions.ResourceNotFoundException;
 import com.jaspersoft.jasperserver.jrsh.core.common.SessionFactory;
 import jline.console.completer.Completer;
-import lombok.extern.log4j.Log4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -22,7 +21,7 @@ import static com.jaspersoft.jasperserver.jaxrs.client.apiadapters.resources.Res
 /**
  * @author Alexander Krasnyanskiy
  */
-@Log4j
+//@Log4j
 public class RepositoryCompleter implements Completer {
 
     public static int UNIQUE_ID = 0; // hash

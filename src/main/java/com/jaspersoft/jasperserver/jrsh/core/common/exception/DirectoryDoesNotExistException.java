@@ -1,6 +1,6 @@
 package com.jaspersoft.jasperserver.jrsh.core.common.exception;
 
-import static java.lang.String.*;
+import static java.lang.String.format;
 
 /**
  * @author Alexander Krasnyanskiy

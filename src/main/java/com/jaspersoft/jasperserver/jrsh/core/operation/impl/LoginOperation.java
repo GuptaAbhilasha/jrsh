@@ -9,7 +9,6 @@ import com.jaspersoft.jasperserver.jrsh.core.operation.annotation.Parameter;
 import com.jaspersoft.jasperserver.jrsh.core.operation.annotation.Value;
 import com.jaspersoft.jasperserver.jrsh.core.operation.grammar.token.TokenPreconditions;
 import com.jaspersoft.jasperserver.jrsh.core.operation.parser.exception.WrongConnectionStringFormatException;
-import lombok.Data;
 
 import static com.jaspersoft.jasperserver.jrsh.core.operation.OperationResult.ResultCode.FAILED;
 import static com.jaspersoft.jasperserver.jrsh.core.operation.OperationResult.ResultCode.SUCCESS;
@@ -18,7 +17,6 @@ import static java.lang.String.format;
 /**
  * @author Alexander Krasnyanskiy
  */
-@Data
 @Master(name = "login",
         usage = "login [username]|[organization]%[password]@[url]",
         description = "Operation <login> is used to login into JRS")
@@ -104,5 +102,37 @@ public class LoginOperation implements Operation {
 
     public String getConnectionString() {
         return connectionString;
+    }
+
+    public String getServer() {
+        return this.server;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public String getOrganization() {
+        return this.organization;
+    }
+
+    public void setServer(String server) {
+        this.server = server;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setOrganization(String organization) {
+        this.organization = organization;
     }
 }

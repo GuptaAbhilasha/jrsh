@@ -4,7 +4,7 @@ import com.jaspersoft.jasperserver.jaxrs.client.core.AuthenticationCredentials;
 import com.jaspersoft.jasperserver.jaxrs.client.core.RestClientConfiguration;
 import com.jaspersoft.jasperserver.jaxrs.client.core.Session;
 import com.jaspersoft.jasperserver.jaxrs.client.core.SessionStorage;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
@@ -17,9 +17,9 @@ import static java.lang.String.format;
 /**
  * @author Alexander Krasnyanskiy
  */
-@Log4j
 public class SessionFactory {
 
+    private static final Logger log = Logger.getLogger(SessionFactory.class);
     private static Session SHARED_SESSION;
 
 
